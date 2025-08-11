@@ -31,11 +31,10 @@ return new class extends Migration
             
             $table->timestamps();
             
-            // Adicionar restrições únicas
+            // Adicionar restrições únicas apenas para nomes
             $table->unique('nome_pt');
             $table->unique('nome_en');
             $table->unique('nome_es');
-            $table->unique(['cidade', 'pais']);
         });
     }
 

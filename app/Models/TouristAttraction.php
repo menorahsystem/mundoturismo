@@ -82,17 +82,7 @@ class TouristAttraction extends Model
             throw new \Exception('Já existe um ponto turístico com o nome "' . $attraction->nome_es . '" em espanhol.');
         }
 
-        // Verificar se já existe um ponto turístico na mesma cidade e país
-        $existingLocation = static::where('cidade', $attraction->cidade)
-            ->where('pais', $attraction->pais)
-            ->when($attraction->exists, function ($query) use ($attraction) {
-                return $query->where('id', '!=', $attraction->id);
-            })
-            ->first();
-
-        if ($existingLocation) {
-            throw new \Exception('Já existe um ponto turístico em "' . $attraction->cidade . ', ' . $attraction->pais . '".');
-        }
+        // Removida a validação de localização para permitir múltiplos pontos turísticos na mesma cidade
     }
 
     /**

@@ -377,6 +377,100 @@
         <!-- Separator -->
         <div style="height: 2rem; margin: 1rem 0;"></div>
 
+        <!-- Search and Filters Section -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <form method="GET" action="{{ route('admin.attractions.index') }}" class="space-y-6">
+                <!-- Search Bar -->
+                <div class="flex flex-col lg:flex-row gap-4">
+                    <div class="flex-1">
+                        <label for="search" class="block text-sm font-medium text-gray-700 mb-2">Buscar Pontos Turísticos</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <input type="text" 
+                                   name="search" 
+                                   id="search" 
+                                   value="{{ request('search') }}"
+                                   placeholder="Buscar por nome, cidade, país ou categoria..."
+                                   class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                        </div>
+                    </div>
+                    
+                    <!-- Category Filter -->
+                    <div class="lg:w-48">
+                        <label for="categoria" class="block text-sm font-medium text-gray-700 mb-2">Categoria</label>
+                        <select name="categoria" id="categoria" class="block w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            <option value="">Todas as categorias</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category }}" {{ request('categoria') == $category ? 'selected' : '' }}>
+                                    {{ $category }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <!-- Country Filter -->
+                    <div class="lg:w-48">
+                        <label for="pais" class="block text-sm font-medium text-gray-700 mb-2">País</label>
+                        <select name="pais" id="pais" class="block w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            <option value="">Todos os países</option>
+                            @foreach($countries as $country)
+                                <option value="{{ $country }}" {{ request('pais') == $country ? 'selected' : '' }}>
+                                    {{ $country }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button type="submit" 
+                            class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <span>Buscar</span>
+                    </button>
+                    
+                    <a href="{{ route('admin.attractions.index') }}" 
+                       class="bg-gray-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        <span>Limpar Filtros</span>
+                    </a>
+                </div>
+                
+                <!-- Search Results Info -->
+                @if(request('search') || request('categoria') || request('pais'))
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                        <div class="flex items-center space-x-2 text-blue-800">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="font-medium">
+                                @if(request('search'))
+                                    Buscando por: <strong>"{{ request('search') }}"</strong>
+                                @endif
+                                @if(request('categoria'))
+                                    @if(request('search')) | @endif
+                                    Categoria: <strong>{{ request('categoria') }}</strong>
+                                @endif
+                                @if(request('pais'))
+                                    @if(request('search') || request('categoria')) | @endif
+                                    País: <strong>{{ request('pais') }}</strong>
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+                @endif
+            </form>
+        </div>
+
         @if(session('success'))
             <div class="bg-green-50 border border-green-200 text-green-800 px-6 py-4 rounded-xl mb-6 flex items-center space-x-3">
                 <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -509,7 +603,11 @@
             <div class="mt-8 flex flex-col items-center space-y-4">
                 <!-- Info sobre paginação -->
                 <div class="text-sm text-gray-600">
-                    Mostrando {{ $attractions->firstItem() ?? 0 }} a {{ $attractions->lastItem() ?? 0 }} de {{ $attractions->total() }} pontos turísticos
+                    @if(request('search') || request('categoria') || request('pais'))
+                        Mostrando {{ $attractions->firstItem() ?? 0 }} a {{ $attractions->lastItem() ?? 0 }} de {{ $attractions->total() }} resultados encontrados
+                    @else
+                        Mostrando {{ $attractions->firstItem() ?? 0 }} a {{ $attractions->lastItem() ?? 0 }} de {{ $attractions->total() }} pontos turísticos
+                    @endif
                 </div>
                 <!-- Links de paginação -->
                 <div class="bg-white rounded-xl shadow-lg px-6 py-4">
@@ -535,5 +633,36 @@
             </div>
         @endif
     </main>
+
+    <!-- JavaScript para busca automática -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search');
+            const categoriaSelect = document.getElementById('categoria');
+            const paisSelect = document.getElementById('pais');
+            let searchTimeout;
+
+            // Função para submeter o formulário
+            function submitForm() {
+                const form = document.querySelector('form[method="GET"]');
+                if (form) {
+                    form.submit();
+                }
+            }
+
+            // Busca automática após parar de digitar (500ms)
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(submitForm, 500);
+            });
+
+            // Filtros automáticos ao mudar
+            categoriaSelect.addEventListener('change', submitForm);
+            paisSelect.addEventListener('change', submitForm);
+
+            // Foco no campo de busca
+            searchInput.focus();
+        });
+    </script>
 </body>
 </html>

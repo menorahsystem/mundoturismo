@@ -10,9 +10,34 @@ class TouristAttractionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $attractions = TouristAttraction::paginate(10);
+        $query = TouristAttraction::query();
+        
+        // Aplicar filtros de busca
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nome_pt', 'like', "%{$search}%")
+                  ->orWhere('nome_en', 'like', "%{$search}%")
+                  ->orWhere('nome_es', 'like', "%{$search}%")
+                  ->orWhere('cidade', 'like', "%{$search}%")
+                  ->orWhere('pais', 'like', "%{$search}%")
+                  ->orWhere('categoria', 'like', "%{$search}%");
+            });
+        }
+        
+        // Filtro por categoria
+        if ($request->filled('categoria')) {
+            $query->where('categoria', $request->categoria);
+        }
+        
+        // Filtro por país
+        if ($request->filled('pais')) {
+            $query->where('pais', 'like', "%{$request->pais}%");
+        }
+        
+        $attractions = $query->paginate(10)->withQueryString();
         
         // Calcular estatísticas do banco de dados completo
         $stats = [
@@ -21,7 +46,11 @@ class TouristAttractionController extends Controller
             'total_categories' => TouristAttraction::distinct()->count('categoria'),
         ];
         
-        return view('admin.attractions.index', compact('attractions', 'stats'));
+        // Obter categorias e países únicos para os filtros
+        $categories = TouristAttraction::distinct()->pluck('categoria')->sort();
+        $countries = TouristAttraction::distinct()->pluck('pais')->sort();
+        
+        return view('admin.attractions.index', compact('attractions', 'stats', 'categories', 'countries'));
     }
 
     /**
