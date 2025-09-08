@@ -204,6 +204,17 @@
                          <div class="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                      </a>
 
+                     <a href="{{ route('admin.feedback.index') }}" 
+                        class="group relative bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-bold flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                         <div class="button-icon-container w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                             <svg class="button-icon w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h6m-6 4h8m3-4a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                             </svg>
+                         </div>
+                         <span class="text-xs sm:text-sm lg:text-base">Feedback</span>
+                         <div class="absolute inset-0 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                     </a>
+
                      <a href="{{ route('admin.users.index') }}" 
                         class="group relative bg-white/10 backdrop-blur-sm text-white px-6 sm:px-8 py-2 sm:py-3 rounded-xl sm:rounded-2xl font-semibold flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 shadow-xl hover:bg-white/20 transition-all duration-300">
                          <div class="button-icon-container w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
