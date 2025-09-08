@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TouristAttraction;
+use App\Http\Requests\TouristAttractionRequest;
 use Illuminate\Http\Request;
 
 class TouristAttractionController extends Controller
@@ -64,42 +65,21 @@ class TouristAttractionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TouristAttractionRequest $request)
     {
-        $request->validate([
-            'cidade' => 'required|string|max:255',
-            'pais' => 'required|string|max:255',
-            'categoria' => 'required|string|max:255',
-            'imagem_url' => 'nullable|url|max:500',
-            'endereco' => 'nullable|string|max:500',
-            'nome_pt' => 'required|string|max:255|unique:tourist_attractions,nome_pt',
-            'nome_en' => 'required|string|max:255|unique:tourist_attractions,nome_en',
-            'nome_es' => 'required|string|max:255|unique:tourist_attractions,nome_es',
-            'descricao_pt' => 'nullable|string|max:1000',
-            'descricao_en' => 'nullable|string|max:1000',
-            'descricao_es' => 'nullable|string|max:1000',
-        ], [
-            'nome_pt.unique' => 'Já existe um ponto turístico com este nome em português.',
-            'nome_en.unique' => 'Já existe um ponto turístico com este nome em inglês.',
-            'nome_es.unique' => 'Já existe um ponto turístico com este nome em espanhol.',
-        ]);
-
-        // Verificação adicional para cidade + país
-        $existingLocation = TouristAttraction::where('cidade', $request->cidade)
-            ->where('pais', $request->pais)
-            ->first();
-
-        if ($existingLocation) {
-            return back()->withErrors(['cidade' => 'Já existe um ponto turístico em "' . $request->cidade . ', ' . $request->pais . '".'])
-                        ->withInput();
-        }
-
         try {
-            TouristAttraction::create($request->all());
+            TouristAttraction::create($request->validated());
             return redirect()->route('admin.attractions.index')
                 ->with('success', 'Ponto turístico criado com sucesso!');
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()])->withInput();
+            \Log::error('Erro ao criar ponto turístico: ' . $e->getMessage());
+            
+            // Verificar se é um erro de validação específico
+            if (str_contains($e->getMessage(), 'SQLSTATE[23000]')) {
+                return back()->withErrors(['error' => 'Erro ao salvar no banco de dados. Verifique se todos os campos obrigatórios estão preenchidos corretamente.'])->withInput();
+            }
+            
+            return back()->withErrors(['error' => 'Erro inesperado ao criar o ponto turístico. Tente novamente.'])->withInput();
         }
     }
 
@@ -122,43 +102,21 @@ class TouristAttractionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TouristAttraction $attraction)
+    public function update(TouristAttractionRequest $request, TouristAttraction $attraction)
     {
-        $request->validate([
-            'cidade' => 'required|string|max:255',
-            'pais' => 'required|string|max:255',
-            'categoria' => 'required|string|max:255',
-            'imagem_url' => 'nullable|url|max:500',
-            'endereco' => 'nullable|string|max:500',
-            'nome_pt' => 'required|string|max:255|unique:tourist_attractions,nome_pt,' . $attraction->id,
-            'nome_en' => 'required|string|max:255|unique:tourist_attractions,nome_en,' . $attraction->id,
-            'nome_es' => 'required|string|max:255|unique:tourist_attractions,nome_es,' . $attraction->id,
-            'descricao_pt' => 'nullable|string|max:1000',
-            'descricao_en' => 'nullable|string|max:1000',
-            'descricao_es' => 'nullable|string|max:1000',
-        ], [
-            'nome_pt.unique' => 'Já existe um ponto turístico com este nome em português.',
-            'nome_en.unique' => 'Já existe um ponto turístico com este nome em inglês.',
-            'nome_es.unique' => 'Já existe um ponto turístico com este nome em espanhol.',
-        ]);
-
-        // Verificação adicional para cidade + país (excluindo o registro atual)
-        $existingLocation = TouristAttraction::where('cidade', $request->cidade)
-            ->where('pais', $request->pais)
-            ->where('id', '!=', $attraction->id)
-            ->first();
-
-        if ($existingLocation) {
-            return back()->withErrors(['cidade' => 'Já existe um ponto turístico em "' . $request->cidade . ', ' . $request->pais . '".'])
-                        ->withInput();
-        }
-
         try {
-            $attraction->update($request->all());
+            $attraction->update($request->validated());
             return redirect()->route('admin.attractions.index')
                 ->with('success', 'Ponto turístico atualizado com sucesso!');
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()])->withInput();
+            \Log::error('Erro ao atualizar ponto turístico: ' . $e->getMessage());
+            
+            // Verificar se é um erro de validação específico
+            if (str_contains($e->getMessage(), 'SQLSTATE[23000]')) {
+                return back()->withErrors(['error' => 'Erro ao salvar no banco de dados. Verifique se todos os campos obrigatórios estão preenchidos corretamente.'])->withInput();
+            }
+            
+            return back()->withErrors(['error' => 'Erro inesperado ao atualizar o ponto turístico. Tente novamente.'])->withInput();
         }
     }
 

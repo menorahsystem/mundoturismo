@@ -202,7 +202,7 @@ class TouristAttractionSeeder extends Seeder
                 'cidade' => 'Marrakech',
                 'pais' => 'Marrocos',
                 'categoria' => 'Cultural',
-                'imagem_url' => 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800',
+                'imagem_url' => 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Maroc_Marrakech_Jemaa-el-Fna_Luc_Viatour.JPG',
                 'endereco' => 'Jemaa el-Fnaa, Marrakech, Marrocos',
                 'nome_pt' => 'Jemaa el-Fnaa',
                 'nome_en' => 'Jemaa el-Fnaa',

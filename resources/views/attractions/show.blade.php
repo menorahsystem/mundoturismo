@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $attraction->nome }} - Turismo pelo Mundo</title>
+    <title>{{ $attraction->nome }} - ExploreNow</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -192,6 +192,20 @@
                                     </span>
                                     <span class="text-gray-800">{{ $attraction->cidade }}</span>
                                 </div>
+                                @if($attraction->estado)
+                                <div class="flex items-center">
+                                    <span class="text-gray-600 w-24">
+                                        @if(app()->getLocale() == 'pt')
+                                            Estado:
+                                        @elseif(app()->getLocale() == 'en')
+                                            State:
+                                        @else
+                                            Estado:
+                                        @endif
+                                    </span>
+                                    <span class="text-gray-800">{{ $attraction->estado }}</span>
+                                </div>
+                                @endif
                                 <div class="flex items-center">
                                     <span class="text-gray-600 w-24">
                                         @if(app()->getLocale() == 'pt')

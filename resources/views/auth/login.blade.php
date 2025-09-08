@@ -5,7 +5,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="same-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Turismo pelo Mundo</title>
+    <title>Login - ExploreNow</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .hp-field { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
@@ -16,7 +16,7 @@
         <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl p-8 text-white">
             <div class="text-center mb-6">
                 <div class="text-4xl">🌎</div>
-                <h1 class="text-2xl font-bold mt-2">Turismo pelo Mundo</h1>
+                <h1 class="text-2xl font-bold mt-2">ExploreNow</h1>
                 <p class="text-white/80 text-sm mt-1">Acesso ao painel administrativo</p>
             </div>
 
@@ -50,7 +50,7 @@
                 <button type="submit" class="w-full py-3 rounded-lg bg-blue-500 hover:bg-blue-600 transition-colors font-semibold shadow-lg">Entrar</button>
             </form>
         </div>
-        <p class="text-center text-white/70 text-xs mt-4">© {{ date('Y') }} Turismo pelo Mundo</p>
+        <p class="text-center text-white/70 text-xs mt-4">© {{ date('Y') }} ExploreNow</p>
     </div>
 </body>
 </html>

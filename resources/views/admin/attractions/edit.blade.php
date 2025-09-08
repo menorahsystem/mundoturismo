@@ -92,6 +92,44 @@
                     @method('PUT')
                     
                     <div class="p-8">
+                        @if ($errors->any())
+                            <div class="mb-6 rounded-xl border border-rose-200 bg-rose-50 text-rose-800 px-4 py-3">
+                                <div class="font-semibold mb-1 flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                    </svg>
+                                    <span>Corrija os campos destacados:</span>
+                                </div>
+                                <ul class="list-disc list-inside text-sm space-y-1">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if (session('success'))
+                            <div class="mb-6 rounded-xl border border-green-200 bg-green-50 text-green-800 px-4 py-3">
+                                <div class="font-semibold flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span>{{ session('success') }}</span>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="mb-6 rounded-xl border border-red-200 bg-red-50 text-red-800 px-4 py-3">
+                                <div class="font-semibold flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                    </svg>
+                                    <span>{{ session('error') }}</span>
+                                </div>
+                            </div>
+                        @endif
+
                         <!-- Basic Information -->
                         <div class="mb-6">
                             <h2 class="text-lg font-semibold text-gray-800 mb-4 flex items-center space-x-2">
@@ -111,9 +149,15 @@
                                         <span>Cidade *</span>
                                     </label>
                                     <input type="text" name="cidade" id="cidade" value="{{ old('cidade', $attraction->cidade) }}" required
-                                           class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
+                                           placeholder="Ex.: Marrakech"
+                                           class="form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white {{ $errors->has('cidade') ? 'border-red-500 focus:ring-red-500' : 'border-gray-300' }}">
                                     @error('cidade')
-                                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-2 flex items-center space-x-1">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
+                                            <span>{{ $message }}</span>
+                                        </p>
                                     @enderror
                                 </div>
 
@@ -125,9 +169,15 @@
                                         <span>País *</span>
                                     </label>
                                     <input type="text" name="pais" id="pais" value="{{ old('pais', $attraction->pais) }}" required
-                                           class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
+                                           placeholder="Ex.: Marrocos"
+                                           class="form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white {{ $errors->has('pais') ? 'border-red-500 focus:ring-red-500' : 'border-gray-300' }}">
                                     @error('pais')
-                                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-2 flex items-center space-x-1">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
+                                            <span>{{ $message }}</span>
+                                        </p>
                                     @enderror
                                 </div>
 
@@ -139,7 +189,7 @@
                                         <span>Categoria *</span>
                                     </label>
                                     <select name="categoria" id="categoria" required
-                                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
+                                            class="form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white {{ $errors->has('categoria') ? 'border-red-500 focus:ring-red-500' : 'border-gray-300' }}">
                                         <option value="">Selecione uma categoria</option>
                                         <option value="Histórico" {{ old('categoria', $attraction->categoria) == 'Histórico' ? 'selected' : '' }}>Histórico</option>
                                         <option value="Religioso" {{ old('categoria', $attraction->categoria) == 'Religioso' ? 'selected' : '' }}>Religioso</option>
@@ -151,7 +201,12 @@
                                         <option value="Tecnológico" {{ old('categoria', $attraction->categoria) == 'Tecnológico' ? 'selected' : '' }}>Tecnológico</option>
                                     </select>
                                     @error('categoria')
-                                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-2 flex items-center space-x-1">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
+                                            <span>{{ $message }}</span>
+                                        </p>
                                     @enderror
                                 </div>
 
@@ -163,10 +218,17 @@
                                         <span>URL da Imagem</span>
                                     </label>
                                     <input type="url" name="imagem_url" id="imagem_url" value="{{ old('imagem_url', $attraction->imagem_url) }}"
-                                           class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white">
+                                           placeholder="https://exemplo.com/imagem.jpg"
+                                           class="form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white {{ $errors->has('imagem_url') ? 'border-red-500 focus:ring-red-500' : 'border-gray-300' }}">
                                     @error('imagem_url')
-                                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                                        <p class="text-red-500 text-sm mt-2 flex items-center space-x-1">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
+                                            <span>{{ $message }}</span>
+                                        </p>
                                     @enderror
+                                    <p class="text-xs text-gray-500 mt-1">Deixe em branco se não quiser usar uma imagem</p>
                                 </div>
 
                                 <div class="bg-gray-50 rounded-xl p-4 md:col-span-2">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $attraction->nome_pt }} | Admin - Turismo pelo Mundo</title>
+    <title>{{ $attraction->nome_pt }} | Admin - ExploreNow</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

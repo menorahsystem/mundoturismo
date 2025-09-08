@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Turismo pelo Mundo</title>
+  <title>Admin - ExploreNow</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -13,6 +13,7 @@
         <a href="{{ route('admin.dashboard') }}" class="font-semibold hover:text-blue-600">Dashboard</a>
         <a href="{{ route('admin.users.index') }}" class="hover:text-blue-600">Usuários</a>
         <a href="{{ route('admin.attractions.index') }}" class="hover:text-blue-600">Pontos Turísticos</a>
+        <a href="{{ route('admin.feedback.index') }}" class="hover:text-blue-600">Feedback</a>
         <a href="/" class="text-blue-600 hover:underline">Voltar ao site</a>
       </div>
       <div class="flex items-center gap-3">

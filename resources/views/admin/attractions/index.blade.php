@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Pontos Turísticos | Turismo pelo Mundo</title>
+    <title>Admin - Pontos Turísticos | ExploreNow</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -554,7 +554,13 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         </svg>
-                                        <div class="text-xs sm:text-sm text-gray-900">{{ $attraction->cidade }}, {{ $attraction->pais }}</div>
+                                        <div class="text-xs sm:text-sm text-gray-900">
+                                            {{ $attraction->cidade }}
+                                            @if($attraction->estado)
+                                                , {{ $attraction->estado }}
+                                            @endif
+                                            , {{ $attraction->pais }}
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="px-4 sm:px-8 lg:px-12 py-4 sm:py-6 whitespace-nowrap">

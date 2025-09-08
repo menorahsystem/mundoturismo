@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         @if(app()->getLocale() == 'pt')
-            Turismo pelo Mundo
+            ExploreNow
         @elseif(app()->getLocale() == 'en')
-            Tourism Around the World
+            ExploreNow
         @else
-            Turismo por el Mundo
+            ExploreNow
         @endif
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -184,14 +184,22 @@
 
         <!-- Header Content -->
         <div class="relative z-10 container mx-auto px-4 py-16">
+            <div class="flex items-center justify-end mb-4 gap-4 text-white/90 text-sm">
+                <a href="{{ route('home') }}" class="hover:underline">
+                    @if(app()->getLocale() == 'pt') Início @elseif(app()->getLocale() == 'en') Home @else Inicio @endif
+                </a>
+                <a href="{{ route('feedback.index') }}" class="hover:underline">
+                    @if(app()->getLocale() == 'pt') Comentários e Sugestões @elseif(app()->getLocale() == 'en') Comments and Suggestions @else Comentarios y Sugerencias @endif
+                </a>
+            </div>
             <div class="text-center text-white">
                 <h1 class="text-5xl md:text-6xl font-bold mb-6">
                     @if(app()->getLocale() == 'pt')
-                        Turismo pelo Mundo
+                        ExploreNow
                     @elseif(app()->getLocale() == 'en')
-                        Tourism Around the World
+                        ExploreNow
                     @else
-                        Turismo por el Mundo
+                        ExploreNow
                     @endif
                 </h1>
                 <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
@@ -838,7 +846,13 @@
                         
                         <div class="carousel-overlay">
                             <h3 class="text-2xl md:text-3xl font-bold mb-2">{{ $attraction->nome }}</h3>
-                            <p class="text-lg mb-3">{{ $attraction->localizacao }}</p>
+                            <p class="text-lg mb-3">
+                                {{ $attraction->cidade }}
+                                @if($attraction->estado)
+                                    , {{ $attraction->estado }}
+                                @endif
+                                , {{ $attraction->pais }}
+                            </p>
                             <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium">
                                 {{ $attraction->categoria }}
                             </span>
@@ -890,7 +904,13 @@
                             <span class="px-3 py-1 bg-{{ $attraction->category_color }}-100 text-{{ $attraction->category_color }}-800 text-xs font-medium rounded-full">{{ $attraction->categoria }}</span>
                         </div>
                         
-                        <p class="text-sm text-gray-600 mb-3">{{ $attraction->localizacao }}</p>
+                        <p class="text-sm text-gray-600 mb-3">
+                            {{ $attraction->cidade }}
+                            @if($attraction->estado)
+                                , {{ $attraction->estado }}
+                            @endif
+                            , {{ $attraction->pais }}
+                        </p>
                         
                         @if($attraction->descricao)
                             <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ Str::limit($attraction->descricao, 120) }}</p>
@@ -988,12 +1008,23 @@
             <div class="text-center text-gray-600">
                 <p>&copy; 2024 
                     @if(app()->getLocale() == 'pt')
-                        Turismo pelo Mundo. Todos os direitos reservados.
+                        ExploreNow. Todos os direitos reservados.
                     @elseif(app()->getLocale() == 'en')
-                        Tourism Around the World. All rights reserved.
+                        ExploreNow. All rights reserved.
                     @else
-                        Turismo por el Mundo. Todos los derechos reservados.
+                        ExploreNow. Todos los derechos reservados.
                     @endif
+                </p>
+                <p class="mt-2">
+                    <a href="{{ route('feedback.index') }}" class="text-blue-600 hover:underline">
+                        @if(app()->getLocale() == 'pt')
+                            Comentários e Sugestões
+                        @elseif(app()->getLocale() == 'en')
+                            Comments and Suggestions
+                        @else
+                            Comentarios y Sugerencias
+                        @endif
+                    </a>
                 </p>
             </div>
         </div>

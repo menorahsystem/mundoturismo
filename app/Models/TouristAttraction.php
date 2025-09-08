@@ -11,6 +11,7 @@ class TouristAttraction extends Model
 
     protected $fillable = [
         'cidade',
+        'estado',
         'pais',
         'categoria',
         'imagem_url',
@@ -171,11 +172,19 @@ class TouristAttraction extends Model
     }
 
     /**
-     * Get the full location (city, country)
+     * Get the full location (city, state, country)
      */
     public function getLocalizacaoAttribute()
     {
-        return "{$this->cidade}, {$this->pais}";
+        $location = $this->cidade;
+        
+        if ($this->estado) {
+            $location .= ", {$this->estado}";
+        }
+        
+        $location .= ", {$this->pais}";
+        
+        return $location;
     }
 
     /**
