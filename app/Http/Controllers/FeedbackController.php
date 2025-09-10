@@ -11,8 +11,8 @@ class FeedbackController extends Controller
 {
     public function index()
     {
-        $comentarios = Feedback::where('tipo', 'comentario')->where('aprovado', true)->latest()->paginate(10, ['*'], 'comentarios');
-        $sugestoes = Feedback::where('tipo', 'sugestao')->where('aprovado', true)->latest()->paginate(10, ['*'], 'sugestoes');
+        $comentarios = Feedback::with('touristAttraction')->where('tipo', 'comentario')->where('aprovado', true)->latest()->paginate(10, ['*'], 'comentarios');
+        $sugestoes = Feedback::with('touristAttraction')->where('tipo', 'sugestao')->where('aprovado', true)->latest()->paginate(10, ['*'], 'sugestoes');
         $atracoes = TouristAttraction::orderBy('nome_pt')->get(['id','nome_pt','nome_en','nome_es']);
 
         return view('feedback.index', compact('comentarios', 'sugestoes', 'atracoes'));
@@ -29,11 +29,19 @@ class FeedbackController extends Controller
             'atracao_sugerida' => 'nullable|string|max:255',
         ]);
 
-        $validated['aprovado'] = false;
+        // Sugestões são aprovadas automaticamente; comentários precisam de aprovação
+        $validated['aprovado'] = $validated['tipo'] === 'sugestao' ? true : false;
+        // Status da sugestão inicia como pendente
+        if ($validated['tipo'] === 'sugestao') {
+            $validated['sugestao_status'] = 'pendente';
+        }
         Feedback::create($validated);
 
-        return redirect()->route('feedback.index')
-            ->with('success', $validated['tipo'] === 'comentario' ? 'Comentário enviado para aprovação.' : 'Sugestão enviada para aprovação.');
+        $message = $validated['tipo'] === 'comentario' 
+            ? 'Comentário enviado para aprovação.' 
+            : 'Sugestão enviada com sucesso!';
+
+        return redirect()->route('feedback.index')->with('success', $message);
     }
 }
 

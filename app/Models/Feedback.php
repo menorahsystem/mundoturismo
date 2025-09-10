@@ -19,6 +19,7 @@ class Feedback extends Model
         'tourist_attraction_id',
         'atracao_sugerida',
         'aprovado',
+        'sugestao_status',
     ];
 
     public function touristAttraction()

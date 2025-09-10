@@ -29,5 +29,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('feedback', [FeedbackAdminController::class, 'index'])->name('feedback.index');
     Route::post('feedback/{feedback}/approve', [FeedbackAdminController::class, 'approve'])->name('feedback.approve');
     Route::post('feedback/{feedback}/reject', [FeedbackAdminController::class, 'reject'])->name('feedback.reject');
+    Route::post('feedback/{feedback}/sugestao-status', [FeedbackAdminController::class, 'updateSuggestionStatus'])->name('feedback.suggestion_status');
     Route::delete('feedback/{feedback}', [FeedbackAdminController::class, 'destroy'])->name('feedback.destroy');
 });

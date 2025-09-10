@@ -28,6 +28,12 @@
       </div>
     @endif
 
+    @if(session('error'))
+      <div class="mb-6 px-4 py-3 rounded bg-red-100 text-red-800">
+        {{ session('error') }}
+      </div>
+    @endif
+
     <h1 class="text-3xl font-bold text-gray-900 mb-6">
       @if(app()->getLocale() == 'pt') Comentários e Sugestões
       @elseif(app()->getLocale() == 'en') Comments and Suggestions
@@ -59,7 +65,15 @@
                   </div>
                   <p class="mt-2 text-gray-700 whitespace-pre-line">{{ $c->conteudo }}</p>
                   @if($c->touristAttraction)
-                    <div class="mt-2 text-sm text-gray-600">Sobre: <span class="font-medium">{{ $c->touristAttraction->nome }}</span></div>
+                    <div class="mt-2 text-sm text-gray-600">
+                      @if(app()->getLocale() == 'pt')
+                        Sobre: <span class="font-medium">{{ $c->touristAttraction->nome }}</span>
+                      @elseif(app()->getLocale() == 'en')
+                        About: <span class="font-medium">{{ $c->touristAttraction->nome }}</span>
+                      @else
+                        Acerca de: <span class="font-medium">{{ $c->touristAttraction->nome }}</span>
+                      @endif
+                    </div>
                   @endif
                 </div>
               @empty
@@ -125,9 +139,22 @@
                     <div class="text-xs text-gray-500">{{ $s->created_at->diffForHumans() }}</div>
                   </div>
                   @if($s->atracao_sugerida)
-                    <div class="text-sm text-gray-600">Sugestão: <span class="font-medium">{{ $s->atracao_sugerida }}</span></div>
+                    <div class="text-sm text-gray-600">
+                      @if(app()->getLocale() == 'pt')
+                        Sugestão: <span class="font-medium">{{ $s->atracao_sugerida }}</span>
+                      @elseif(app()->getLocale() == 'en')
+                        Suggestion: <span class="font-medium">{{ $s->atracao_sugerida }}</span>
+                      @else
+                        Sugerencia: <span class="font-medium">{{ $s->atracao_sugerida }}</span>
+                      @endif
+                    </div>
                   @endif
                   <p class="mt-2 text-gray-700 whitespace-pre-line">{{ $s->conteudo }}</p>
+                  <div class="mt-2 text-xs">
+                    <span class="px-2 py-1 rounded-full {{ $s->sugestao_status==='inserido' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                      {{ $s->sugestao_status==='inserido' ? (app()->getLocale()=='en'?'Inserted':(app()->getLocale()=='es'?'Insertado':'Inserido')) : (app()->getLocale()=='en'?'Pending':(app()->getLocale()=='es'?'Pendiente':'Pendente')) }}
+                    </span>
+                  </div>
                 </div>
               @empty
                 <p class="text-gray-600">
