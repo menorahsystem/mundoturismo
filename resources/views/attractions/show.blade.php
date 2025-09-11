@@ -14,6 +14,8 @@
 
       gtag('config', 'G-9K8HP18JEE');
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3039233942822179"
+     crossorigin="anonymous"></script>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
