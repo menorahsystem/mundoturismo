@@ -162,6 +162,26 @@
                                 </div>
 
                                 <div class="bg-gray-50 rounded-xl p-4">
+                                    <label for="estado" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center space-x-2">
+                                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                        </svg>
+                                        <span>Estado/Província</span>
+                                    </label>
+                                    <input type="text" name="estado" id="estado" value="{{ old('estado', $attraction->estado) }}"
+                                           placeholder="Ex.: RJ, SP, CA, NY (opcional)"
+                                           class="form-input w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white {{ $errors->has('estado') ? 'border-red-500 focus:ring-red-500' : 'border-gray-300' }}">
+                                    @error('estado')
+                                        <p class="text-red-500 text-sm mt-2 flex items-center space-x-1">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                            </svg>
+                                            <span>{{ $message }}</span>
+                                        </p>
+                                    @enderror
+                                </div>
+
+                                <div class="bg-gray-50 rounded-xl p-4">
                                     <label for="pais" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center space-x-2">
                                         <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>

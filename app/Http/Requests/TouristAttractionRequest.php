@@ -24,6 +24,7 @@ class TouristAttractionRequest extends FormRequest
     {
         $rules = [
             'cidade' => 'required|string|max:255',
+            'estado' => 'nullable|string|max:100',
             'pais' => 'required|string|max:255',
             'categoria' => 'required|string|max:255',
             'imagem_url' => 'nullable|url|max:1000',
@@ -61,6 +62,7 @@ class TouristAttractionRequest extends FormRequest
         return [
             'cidade.required' => 'O campo cidade é obrigatório.',
             'cidade.max' => 'O nome da cidade não pode ter mais de 255 caracteres.',
+            'estado.max' => 'O estado/província não pode ter mais de 100 caracteres.',
             'pais.required' => 'O campo país é obrigatório.',
             'pais.max' => 'O nome do país não pode ter mais de 255 caracteres.',
             'categoria.required' => 'O campo categoria é obrigatório.',
@@ -92,6 +94,7 @@ class TouristAttractionRequest extends FormRequest
     {
         return [
             'cidade' => 'cidade',
+            'estado' => 'estado/província',
             'pais' => 'país',
             'categoria' => 'categoria',
             'imagem_url' => 'URL da imagem',
