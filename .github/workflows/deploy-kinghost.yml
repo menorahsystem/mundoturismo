@@ -13,6 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Acessar diretorio da aplicação
+      run: |
+        cd /var/www/mundoturismo
+
     - name: Git pull
       run: |
         git pull origin main
