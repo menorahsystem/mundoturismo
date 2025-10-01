@@ -87,6 +87,19 @@
 
                 <!-- Content -->
                 <div class="p-8">
+                    <!-- Anúncio Horizontal Topo (Página de Atração) -->
+                    <div class="mb-8 flex justify-center">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-3039233942822179"
+                             data-ad-slot="2875429677"
+                             data-ad-format="horizontal"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
                     <!-- Title and Location -->
                     <div class="mb-8">
                         <h1 class="text-4xl font-bold text-gray-800 mb-4">{{ $attraction->nome }}</h1>
@@ -261,6 +274,19 @@
                         </div>
                     </div>
 
+                    <!-- Anúncio Horizontal Rodapé (Página de Atração) -->
+                    <div class="mt-8 mb-8 flex justify-center">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-3039233942822179"
+                             data-ad-slot="1562348003"
+                             data-ad-format="horizontal"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
                     <!-- Back Button -->
                     <div class="mt-12 pt-8 border-t">
                         <a href="{{ route('home') }}" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
@@ -290,29 +316,6 @@
             window.location.href = newUrl;
         });
     </script>
-    <!-- Anuncio_explorenow_vertical (fixed corner) -->
-    <div style="position:fixed; right:8px; bottom:8px; z-index:50; max-width:300px;">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3039233942822179"
-             data-ad-slot="4435923351"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-    
-    <!-- Hide ad on very small screens -->
-    <style>
-        @media (max-width: 640px) {
-            div[style*="position:fixed"][style*="right:8px"] {
-                right: 4px !important;
-                bottom: 4px !important;
-                max-width: 200px !important;
-            }
-        }
-    </style>
 </body>
 </html>
 

@@ -897,6 +897,19 @@
 
     <!-- Content Section -->
     <section class="container mx-auto px-4 py-8">
+        <!-- Anúncio Horizontal Topo (Home) -->
+        <div class="mb-8 flex justify-center">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3039233942822179"
+                 data-ad-slot="4188511345"
+                 data-ad-format="horizontal"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         @if($touristAttractions->count() > 0)
             <div class="attractions-grid w-full">
                 @foreach($touristAttractions as $attraction)
@@ -969,6 +982,19 @@
                     </div>
                 </div>
                 @endforeach
+            </div>
+
+            <!-- Anúncio Horizontal Meio (após os cards - Home) -->
+            <div class="mt-8 mb-8 flex justify-center">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3039233942822179"
+                     data-ad-slot="4126584552"
+                     data-ad-format="horizontal"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         @else
             <div class="text-center py-12">
@@ -1210,29 +1236,6 @@
         });
     </script>
 
-    <!-- Anuncio_explorenow_vertical (fixed corner) -->
-    <div style="position:fixed; right:8px; bottom:8px; z-index:50; max-width:300px;">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3039233942822179"
-             data-ad-slot="4435923351"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-    
-    <!-- Hide ad on very small screens -->
-    <style>
-        @media (max-width: 640px) {
-            div[style*="position:fixed"][style*="right:8px"] {
-                right: 4px !important;
-                bottom: 4px !important;
-                max-width: 200px !important;
-            }
-        }
-    </style>
 </body>
 </html>
         
