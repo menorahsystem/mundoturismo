@@ -12,16 +12,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
-    - name: Install Composer dependencies
+
+    - name: Git pull
       run: |
-        composer install --no-dev --optimize-autoloader --no-interaction
-        
-    - name: Install NPM dependencies and build
-      run: |
-        npm ci --production
-        npm run build
-        
+        git pull origin main
+
     - name: Clear and cache configs
       run: |
         php artisan config:clear
