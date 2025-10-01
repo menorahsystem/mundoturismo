@@ -290,6 +290,29 @@
             window.location.href = newUrl;
         });
     </script>
+    <!-- Anuncio_explorenow_vertical (fixed corner) -->
+    <div style="position:fixed; right:8px; bottom:8px; z-index:50; max-width:300px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3039233942822179"
+             data-ad-slot="4435923351"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <!-- Hide ad on very small screens -->
+    <style>
+        @media (max-width: 640px) {
+            div[style*="position:fixed"][style*="right:8px"] {
+                right: 4px !important;
+                bottom: 4px !important;
+                max-width: 200px !important;
+            }
+        }
+    </style>
 </body>
 </html>
 
