@@ -910,9 +910,6 @@
                  data-ad-slot="4188511345"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
 
         @if($touristAttractions->count() > 0)
@@ -997,9 +994,6 @@
                      data-ad-slot="4126584552"
                      data-ad-format="horizontal"
                      data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
         @else
             <div class="text-center py-12">
@@ -1239,6 +1233,11 @@
             carousel.addEventListener('mouseenter', stopCarousel);
             carousel.addEventListener('mouseleave', startCarousel);
         });
+    </script>
+
+    <!-- Initialize AdSense -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
 </body>
