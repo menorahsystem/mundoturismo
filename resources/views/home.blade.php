@@ -903,7 +903,7 @@
                  style="display:block"
                  data-ad-client="ca-pub-3039233942822179"
                  data-ad-slot="4188511345"
-                 data-ad-format="horizontal"
+                 data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({});
@@ -982,6 +982,19 @@
                     </div>
                 </div>
                 @endforeach
+            </div>
+
+            <!-- Anúncio Horizontal Meio (após os cards - Home) -->
+            <div class="mt-8 mb-8 flex justify-center">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3039233942822179"
+                     data-ad-slot="4126584552"
+                     data-ad-format="horizontal"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         @else
             <div class="text-center py-12">

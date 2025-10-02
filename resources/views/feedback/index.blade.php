@@ -55,19 +55,6 @@
       @endif
     </h1>
 
-    <!-- Anúncio Horizontal Topo (Feedback) -->
-    <div class="mb-8 flex justify-center">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-3039233942822179"
-           data-ad-slot="4188511345"
-           data-ad-format="horizontal"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-
     <div class="bg-white rounded-lg shadow">
       <div class="border-b px-4 pt-4">
         <div class="flex gap-4">
