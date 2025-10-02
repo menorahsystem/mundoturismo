@@ -151,6 +151,11 @@
         .carousel-nav.next {
             right: 1rem;
         }
+        
+        /* Ensure modal is always on top */
+        #attractionModal {
+            z-index: 999999 !important;
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -1022,8 +1027,8 @@
     </section>
 
     <!-- Modal -->
-    <div id="attractionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div id="attractionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-[9999] flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative z-[10000]">
             <div class="p-6">
                 <div class="flex justify-between items-start mb-6">
                     <h2 id="modalTitle" class="text-3xl font-bold text-gray-800"></h2>
